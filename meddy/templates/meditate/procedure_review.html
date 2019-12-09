@@ -1,0 +1,58 @@
+{% extends 'meditate/base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container-fluid">
+<h1 class="text-center heading"><i class="fas fa-award"></i> MEDITATE</h1>
+  <!-- Card -->
+  <div class="card card-cascade wider reverse review" style="margin-top:10px;">
+
+    <!-- Card image -->
+    <div class="view view-cascade overlay">
+      <img class="card-img-top" src="{{single_procedure.image.url}}" alt="Card image cap">
+    </div>
+
+    <!-- Card content -->
+    <div class="card-body card-body-cascade text-center">
+
+      <!-- Title -->
+      <h4 class="card-title"><strong>{{single_procedure.title}}</strong></h4>
+      <!-- Subtitle -->
+      <a href="{{single_procedure.link}}" class="font-weight-bold indigo-text py-2">See the video</a>
+      <!-- Text -->
+      <p class="card-text">{{single_procedure.details}}</p>
+      <div class="row">
+        <div class="col-md-4">Process <span class="badge badge-pill badge-secondary">{{single_procedure.process}}</span></div>
+        <div class="col-md-4">steps <span class="badge badge-pill badge-info">{{single_procedure.steps}}</span></div>
+      </div>
+      <h3 style="margin:20px;">Average Score <span class="badge badge-primary">{{average_score}}</span></h3>
+      <a href="" class="btn btn-success btn-rounded btn-block" data-toggle="modal"
+        data-target="#{{single_procedure.id}}">Vote</a>
+        <!-- Modal -->
+        <div class="modal fade bd-example-modal-md" id="{{single_procedure.id}}" tabindex="-1" role="dialog" aria-labelledby="procedureTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-center" id="procedureTitle">Rate Procedure</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form class="{% url 'procedure_review' single_procedure.pk %}" action="" method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {% bootstrap_form vote_form%}
+
+                  <div class="form-group">
+                    <input type="submit" class="btn mx-auto" value="Submit Vote">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+  </div>
+  <!-- Card -->
+</div>
+{% endblock %}
