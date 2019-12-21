@@ -5,10 +5,8 @@ from .forms import ProcedureForm,ProfileForm,VoteForm
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.response import Response
-# from .serializer import ProfileSerializer,ProcedureSerializer
 
-# Create your views here.
-
+# Create your views 
 def home(request):
     all_procedure = Procedure.fetch_all_images()
     return render(request,"meditate/index.html",{"all_images":all_procedure})
