@@ -1,0 +1,1 @@
+web: gunicorn meditate.wsgi --log-file -
