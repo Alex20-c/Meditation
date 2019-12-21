@@ -11,7 +11,7 @@ from rest_framework.response import Response
 
 def home(request):
     all_procedure = Procedure.fetch_all_images()
-    return render(request,"meddy/index.html",{"all_images":all_procedure})
+    return render(request,"meditate/index.html",{"all_images":all_procedure})
 
 @login_required(login_url='/accounts/login/')
 def new_procedure(request):
@@ -25,7 +25,7 @@ def new_procedure(request):
         return redirect('home')
     else:
         form = ProcedureForm()
-    return render(request,"meddy/new_procedure.html",{"form":form})
+    return render(request,"meditate/new_post.html",{"form":form})
 
 @login_required(login_url='/accounts/login/')
 def new_profile(request):
@@ -92,4 +92,4 @@ def procedure_review(request,procedure_id):
 
     except Exception as  e:
         raise Http404()
-    return render(request,'meddy/procedure_review.html',{"vote_form":vote_form,"single_procedure":single_procedure,"average_score":average_score})
+    return render(request,'meditate/procedure_review.html',{"vote_form":vote_form,"single_procedure":single_procedure,"average_score":average_score})
